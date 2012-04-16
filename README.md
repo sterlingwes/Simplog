@@ -36,7 +36,7 @@ Usage
 		server	= http.createServer(app);
 		server.listen(80);
 		
-	var	io		= require('socket.io').listen(app),
+	var	io		= require('socket.io').listen(server),
 		s		= require('Simplog');
 
 *Note* that on account of [this issue](https://github.com/senchalabs/connect/issues/500) with Connect/Express & Socket.IO, we require `http` vs. `app.listen()`.
@@ -62,7 +62,13 @@ Now, run your app and split your log output:
 
 	sudo node server.js 1>>server.log 2>>error.log
 	
-You should run your app with upstart so that you can configure crash notifications.
+Try using the Simplog logger in you application:
+
+	s.log('Message'); 					// defaults to debug level 1, no label/namespace
+	s.log('Message',2,'MainModule'); 	// info level 2, MainModule as label
+	s.log('Message','MainModule'); 		// defaults to debug level
+	s.log('Message',3);					// error level 3, no label
+	console.log('Message');				// this and sys.log works fine (no formatting)
 	
 That's it! More thorough API documentation to follow.
 
@@ -72,7 +78,7 @@ Known Issues / To-do
 
 *   Browser client does not render exception traces gracefully
 *   Does not support distributed logging
-*	Does not detect exceptions / crashes (notifications)
+*	Does not detect exceptions / crashes (providing notifications)
 
 ---
 

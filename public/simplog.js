@@ -8,7 +8,6 @@ var startSlog = function() {
 
 	function parse(html,start) {
 		var lines 	= html.split(/\n/g);
-		console.log(lines);
 		var txt		= '';
 		lines.forEach(function(line) {
 			var l	= line.split('|');
@@ -40,12 +39,9 @@ var startSlog = function() {
 	if($('#container').hasScrollBar())
 		$('#container').scrollTop($('#container')[0].scrollHeight);
 	
-	var socket = io.connect('http://'+location.hostname+'/simplog');
+	var socket = io.connect('http://'+location.host+'/simplog');
 	socket.on('connect', function(data) {
-		console.log('Connected');
-		console.log(data);
 		socket.on('logged', function(ldata) {
-			console.log(ldata);
 			if(ldata.lines.length>0 && ldata.file==active) {
 				$('#container ul').append(parse(ldata.lines));
 				if($('#container').hasScrollBar())
@@ -56,7 +52,7 @@ var startSlog = function() {
 	
 	$('#bar ul li').click(function(e) {
 		if(e.target.id!=active)
-			$.get('http://'+window.location.hostname+window.location.pathname+'?log='+e.target.id+'&rawlog=1', function(log) {
+			$.get('http://'+window.location.host+window.location.pathname+'?log='+e.target.id+'&rawlog=1', function(log) {
 				$('#container').html(parse(log,true));
 				if($('#container').hasScrollBar())
 					$('#container').scrollTop($('#container')[0].scrollHeight);

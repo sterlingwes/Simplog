@@ -74,7 +74,7 @@ exports.render = function(req,res) {
 						res.send(text,{'Content-Type':'text/plain'});
 					else
 						res.render(__dirname+'/views/client.jade', {log:text,file:key,files:names});
-				else		res.send('Error reading log. '+err.message);
+				else		res.send('Error reading log. The log may be empty.');
 			});
 		else
 			res.send('Error reading log. '+file+' does not exist!');
