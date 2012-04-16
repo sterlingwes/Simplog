@@ -1,7 +1,7 @@
 var express = require('express'),
 	app		= express.createServer(),
 	io		= require('socket.io').listen(app),
-	s		= require('./simplog');
+	s		= require('simplog');
 	
 app.configure(function() {
 	app.use(express.static(__dirname + '/public'));

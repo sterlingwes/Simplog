@@ -6,7 +6,7 @@
 // ** Dependencies: **
 // *   Socket.IO
 //   
-// Free to use, modify and distribute.  
+// Free to use, modify and distribute under the MIT license.  
 // Developed by Wes Johnson (@SterlingWes / wesquire.ca)
 //
 
