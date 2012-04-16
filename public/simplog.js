@@ -22,7 +22,7 @@ var startSlog = function() {
 						default: // debug
 							lclass = "debug"; break;
 					}
-					txt += '<li class="'+lclass+'">'+mark+' <span class="time">'+l[1]+'</span><span class="ns">'+l[2]+'</span><span class="msg">'+l[3]+'</span></li>';
+					txt += '<li class="'+lclass+'"><span class="mark">'+mark+'</span><span class="time">'+l[1]+'</span><span class="ns">'+l[2]+'</span><span class="msg">'+l[3]+'</span></li>';
 				}
 			} else {
 				if(line.length>3)

@@ -20,15 +20,30 @@ Requirements
 Installation
 ------------
 
-`sudo npm install simplog`
+`sudo npm install Simplog`
 
-or from Git
+*Note the capital S! NPM is case sensitive.*
+
+...or direct from Git:
 
 `sudo npm install https://github.com/sterlingwes/Simplog/tarball/master`
 
 
 Usage
------
+=====
+
+Require()
+---------
+
+Take a look at `server_example.js` for the full example.
+
+	var express = require('express'),
+		app		= express.createServer(),
+		io		= require('socket.io').listen(app),
+		s		= require('Simplog');
+		app.listen(80);
+
+*Note* that on account of [this issue](https://github.com/senchalabs/connect/issues/500) with Connect/Express (specifically v3+) & Socket.IO, we should require `http` vs. `app.listen()`, per the following alternative:
 
 	var express = require('express'),
 		http	= require('http'),
@@ -39,7 +54,9 @@ Usage
 	var	io		= require('socket.io').listen(server),
 		s		= require('Simplog');
 
-*Note* that on account of [this issue](https://github.com/senchalabs/connect/issues/500) with Connect/Express & Socket.IO, we require `http` vs. `app.listen()`.
+		
+Configure Express
+-----------------
 		
 Configure express to serve simplog browser client assets:
 
@@ -47,17 +64,29 @@ Configure express to serve simplog browser client assets:
 		app.use(express.static(__dirname + '/node_modules/Simplog/public'));
 	});
 
+	
+Initialize
+----------
+	
 Initialize Simplog, referencing your log files and socket.io.
 
 	s.init({
 		serverlog:	'server.log',
         errorlog:   'error.log'
 	}, io);
+	
+
+Setup Browser Client
+--------------------
 
 Finally, setup the route to your browser client:
 
 	app.get('/log', s.render);
 
+
+Run!
+----
+	
 Now, run your app and split your log output:
 
 	sudo node server.js 1>>server.log 2>>error.log

@@ -35,6 +35,13 @@ body {
 	color: #f7182b;
 }
 
+#container ul li span.mark {
+	position: absolute;
+	left: 10px;
+	display: inline-block;
+	text-align: left;
+}
+
 #container ul li span.time {
 	position: absolute;
 	left: 30px;
@@ -47,7 +54,7 @@ body {
 
 #container ul li span.ns {
 	position: absolute;
-	left: 140px;
+	left: 160px;
 	display: inline-block;
 	overflow: hidden;
 	width: 125px;
