@@ -1,0 +1,43 @@
+{
+  "author": "Wes Johnson (http://wesquire.ca)",
+  "name": "Simplog",
+  "description": "Simple logging & real-time browser log client for Node.js apps.",
+  "version": "1.0.0",
+  "homepage": "http://wesquire.ca/i/do/code/simplog",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sterlingwes/simplog.git"
+  },
+  "main": "./simplog.js",
+  "dependencies": {
+	"express": "*",
+	"socket.io": "*",
+	"jade": "*"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "keywords": [
+	"logger",
+	"logging",
+	"browser",
+	"client",
+	"real-time",
+	"realtime",
+	"color",
+	"colour",
+	"timestamp",
+	"custom",
+	"debug",
+    "express",
+    "socket.io"
+  ]
+}
