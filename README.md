@@ -109,7 +109,6 @@ Known Issues / To-do
 *   Browser client does not render exception traces gracefully
 *   Does not support distributed logging
 *	Does not detect exceptions / crashes (providing notifications)
-*	On window resize, browser client does not adjust
 
 ---
 

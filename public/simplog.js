@@ -32,20 +32,27 @@ var startSlog = function() {
 		if(start) 	return '<ul>'+txt+'</ul>';
 		else		return txt;
 	}
+	
+	function renderConsole() {
+		$('#container').height(($(window).height()-$('#bar').height()));
+		if($('#container').hasScrollBar())
+			$('#container').scrollTop($('#container')[0].scrollHeight);
+	}
 
 	var log = $('#container').html();
 	$('#container').html(parse(log,true));
-	$('#container').height(($(window).height()-$('#bar').height()));
-	if($('#container').hasScrollBar())
-		$('#container').scrollTop($('#container')[0].scrollHeight);
+	renderConsole();
+		
+	$(window).resize(function() {
+		renderConsole();
+	});
 	
 	var socket = io.connect('http://'+location.host+'/simplog');
 	socket.on('connect', function(data) {
 		socket.on('logged', function(ldata) {
 			if(ldata.lines.length>0 && ldata.file==active) {
 				$('#container ul').append(parse(ldata.lines));
-				if($('#container').hasScrollBar())
-					$('#container').scrollTop($('#container')[0].scrollHeight);
+				renderConsole();
 			}
 		});
 	});
@@ -54,8 +61,7 @@ var startSlog = function() {
 		if(e.target.id!=active)
 			$.get('http://'+window.location.host+window.location.pathname+'?log='+e.target.id+'&rawlog=1', function(log) {
 				$('#container').html(parse(log,true));
-				if($('#container').hasScrollBar())
-					$('#container').scrollTop($('#container')[0].scrollHeight);
+				renderConsole();
 				$('#bar ul li.active').removeClass('active');
 				$('#'+e.target.id).addClass('active');
 				active=e.target.id;
