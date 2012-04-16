@@ -1,22 +1,38 @@
+//
+// requirements.. we use the http module to sidestep an issue
+// with Socket.io and newer versions of Connect/Express
+//
 var express = require('express'),
-	app		= express.createServer(),
-	io		= require('socket.io').listen(app),
+	http	= require('http'),
+	app		= express(),
+	server	= http.createServer(app);
+	
+	server.listen(80);
+	
+var	io		= require('socket.io').listen(server),
 	s		= require('Simplog');
 	
+io.set('log level', 1); // socket.io debug logs will spam you
+	
+//
+// have express serve the static assets for the Simplog browser client
+//
 app.configure(function() {
 	app.set('view options', { layout: false });
 	app.use(express.static(__dirname + '/node_modules/Simplog/public'));
 });
 	
+//
+// initialize Simplog with our file references and Socket.IO
+//
 s.init({
-	serverlog:	'../server.log',
-	errorlog:	'../error.log'
-},io);
+	serverlog:	'server.log',
+	errorlog:	'error.log'
+}, io);
 
 //
-// A route for your browser client.
+// A route for your browser client handles by Simplog.
 //
-
 app.get('/log', s.render);
 
 //
@@ -40,4 +56,4 @@ app.get('/404', function(req,res) {
 });
 
 app.listen(80);
-s.log('Running server_example.js on port 80',2);
+s.log('Running server_example.js on port 80',2,'Startup');

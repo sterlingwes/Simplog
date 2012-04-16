@@ -71,7 +71,7 @@ exports.render = function(req,res) {
 			readLog(file,function(err,text) {
 				if(text)
 					if(req.param('rawlog'))
-						res.send(text,{'Content-Type':'text/plain'});
+						res.send(text);
 					else
 						res.render(__dirname+'/views/client.jade', {log:text,file:key,files:names});
 				else		res.send('Error reading log. The log may be empty.');
