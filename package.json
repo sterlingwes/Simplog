@@ -9,9 +9,7 @@
     "url": "git://github.com/sterlingwes/Simplog.git"
   },
   "main": "./simplog.js",
-  "dependencies": {
-	"socket.io": "*"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {

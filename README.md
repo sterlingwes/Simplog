@@ -11,10 +11,11 @@ Requirements
 ------------
 
 *   Socket.IO
-*   Express (will remove this requirement soon)
-*   Jade (will also remove soon)
+*   Express
+*   Jade
 
----
+*These need to be installed alongside Simplog, and are not bundled with your install.*
+
 
 Installation
 ------------
@@ -25,16 +26,21 @@ or from Git
 
 `sudo npm install https://github.com/sterlingwes/Simplog/tarball/master`
 
----
 
 Usage
 -----
 
 	var express = require('express'),
-		app		= express.createServer(),
-		io		= require('socket.io').listen(app),
-		s		= require('simplog');
+		http	= require('http'),
+		app		= express(),
+		server	= http.createServer(app);
+		server.listen(80);
+		
+	var	io		= require('socket.io').listen(app),
+		s		= require('Simplog');
 
+*Note* that on account of [this issue](https://github.com/senchalabs/connect/issues/500) with Connect/Express & Socket.IO, we require `http` vs. `app.listen()`.
+		
 Configure express to serve simplog browser client assets:
 
 	app.configure(function() {
@@ -45,21 +51,28 @@ Initialize Simplog, referencing your log files and socket.io.
 
 	s.init({
 		serverlog:	'server.log',
-                errorlog:       'error.log'
+        errorlog:   'error.log'
 	}, io);
-
-Or initialize with express and Simplog will require Socket.io.
-
-	s.init({
-		serverlog:	'server.log',
-                errorlog:       'error.log'
-	}, null, app);
 
 Finally, setup the route to your browser client:
 
 	app.get('/log', s.render);
 
-That's it! More thorough documentation to follow.
+Now, run your app and split your log output:
+
+	sudo node server.js 1>>server.log 2>>error.log
+	
+You should run your app with upstart so that you can configure crash notifications.
+	
+That's it! More thorough API documentation to follow.
+
+
+Known Issues / To-do
+---------------------
+
+*   Browser client does not render exception traces gracefully
+*   Does not support distributed logging
+*	Does not detect exceptions / crashes (notifications)
 
 ---
 

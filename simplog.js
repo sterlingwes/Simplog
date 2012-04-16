@@ -3,9 +3,6 @@
 // =======
 // * Lightweight real-time server log rendering for Node.JS using Socket.IO *  
 //   
-// ** Dependencies: **
-// *   Socket.IO
-//   
 // Free to use, modify and distribute under the MIT license.  
 // Developed by Wes Johnson (@SterlingWes / wesquire.ca)
 //
@@ -48,7 +45,6 @@ exports.init = function(logfiles,sio,app) {
 // -----
 // Handles logging at a certain level. Also accepts a namespace for logging only certain types of logs at different levels. lvl & ns are optional. lvl will be assumed to be the lowest (1: debug).
 //
-exports.log = logger
 var logger = function(msg,lvl,ns) {
 	if(lvl && 'number' != typeof lvl) {
 		ns = lvl; lvl = 1;
@@ -61,6 +57,7 @@ var logger = function(msg,lvl,ns) {
 	var d = new Date();
 	console.log(lvl+'|'+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()+' '+(d.getMonth()+1)+'/'+d.getDate()+ns+msg);
 };
+exports.log = logger;
 
 exports.render = function(req,res) {
 	var key = req.param('log');

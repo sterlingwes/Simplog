@@ -1,14 +1,16 @@
 var express = require('express'),
 	app		= express.createServer(),
 	io		= require('socket.io').listen(app),
-	s		= require('simplog');
+	s		= require('Simplog');
 	
 app.configure(function() {
-	app.use(express.static(__dirname + '/public'));
+	app.set('view options', { layout: false });
+	app.use(express.static(__dirname + '/node_modules/Simplog/public'));
 });
 	
 s.init({
-	serverlog:	'../server.log'
+	serverlog:	'../server.log',
+	errorlog:	'../error.log'
 },io);
 
 //
