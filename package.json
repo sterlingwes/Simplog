@@ -2,7 +2,7 @@
   "author": "Wes Johnson (http://wesquire.ca)",
   "name": "Simplog",
   "description": "Simple logger & real-time browser log client for Node.js apps.",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "homepage": "http://wesquire.ca/i/do/code/simplog",
   "repository": {
     "type": "git",

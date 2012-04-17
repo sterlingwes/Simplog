@@ -110,8 +110,8 @@ function watchLog(wF,cb) {
 					cb(lines);
 				});
 			}
-			else
-				logger('Failed to watch log. File stats unavailable. Are you on Windows?',3,'Simplog');
+//			else
+//				logger('Failed to watch log. File stats unavailable. Are you on Windows?',3,'Simplog');
 		});
 	});
 	
