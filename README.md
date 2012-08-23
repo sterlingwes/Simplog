@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/sterlingwes/Simplog.png)](http://travis-ci.org/sterlingwes/Simplog)
 Simplog
 =======
 
